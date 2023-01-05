@@ -15,12 +15,25 @@
             <%= @book.user.name %>
             <% end %>
           </td>
+          
+    <% if @book.favorite?(current_user) %>
+    <%= link_to post_favorite_path(@book.id), method: :delete do %>
+    <span style="color:red;">❤︎</span>
+      <% end %>
+      <% else %>
+   <%= link_to post_favorites_path(@post.id), method: :post do %>
+        <span>❤︎</span>
+    <% end %>
+<% end %>
+          
+          
+          
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
             <% if @book.user_id == current_user.id %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-            </td>
+            
              <% end %>
         </tr>
       </table>
